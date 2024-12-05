@@ -6,6 +6,8 @@
 
 int main() {
     int n;
+    std::cout << "Enter the number of points (n): ";
+    std::cin >> n;
 
 std::srand(std::time(nullptr));
 std::string filename = "output" + std::to_string(n) + ".txt";
