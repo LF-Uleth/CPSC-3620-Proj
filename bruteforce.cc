@@ -9,12 +9,12 @@ struct Point {
     int x, y;
 };
 
-// Function to calculate the Euclidean distance between two points
+//cacl distance between points
 double calculateDistance(const Point& p1, const Point& p2) {
     return std::sqrt((p1.x - p2.x) * (p1.x - p2.x) + (p1.y - p2.y) * (p1.y - p2.y));
 }
 
-// Brute-force closest-pair algorithm
+//find the closest pair
 void findClosestPair(const std::vector<Point>& points, Point& p1, Point& p2, double& minDistance) {
     minDistance = std::numeric_limits<double>::max();
     for (size_t i = 0; i < points.size(); ++i) {
@@ -30,17 +30,19 @@ void findClosestPair(const std::vector<Point>& points, Point& p1, Point& p2, dou
 }
 
 int main() {
+    //get filename
     std::string filename;
     std::cout << "Enter the input file name: ";
     std::cin >> filename;
 
-    // Read points from the file
+    //read from file
     std::ifstream infile(filename);
     if (!infile.is_open()) {
-        std::cerr << "Failed to open file: " << filename << std::endl;
+        std::cerr << "Error with File: " << filename << std::endl;
         return 1;
     }
 
+    //get points from file
     std::vector<Point> points;
     int x, y;
     char delim1, delim2, delim3;
@@ -49,22 +51,16 @@ int main() {
     }
     infile.close();
 
-    if (points.size() < 2) {
-        std::cerr << "Not enough points to find the closest pair." << std::endl;
-        return 1;
-    }
-
-    // Measure time and find the closest pair
+    //get time for pair
     Point p1, p2;
     double minDistance;
-    auto start = std::chrono::high_resolution_clock::now();
+    auto start = std::chrono::high_resolution_clock::now(); //start timer 
     findClosestPair(points, p1, p2, minDistance);
-    auto end = std::chrono::high_resolution_clock::now();
+    auto end = std::chrono::high_resolution_clock::now(); //end timer
     std::chrono::duration<double> elapsed = end - start;
 
-    // Output the result
-    std::cout << "Closest pair of points: (" << p1.x << "," << p1.y << ") and ("
-              << p2.x << "," << p2.y << ")" << std::endl;
+    //output
+    std::cout << "Closest pair of points: (" << p1.x << "," << p1.y << ") and (" << p2.x << "," << p2.y << ")" << std::endl;
     std::cout << "Minimum distance: " << minDistance << std::endl;
     std::cout << "Time taken: " << elapsed.count() << " seconds" << std::endl;
 
