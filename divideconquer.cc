@@ -111,6 +111,7 @@ int main() {
     }
 
     //get points from file
+    std::vector<Point> points;
     int x, y;
     char delim1, delim2, delim3;
     while (infile >> delim1 >> x >> delim2 >> y >> delim3) {
